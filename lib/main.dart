@@ -2,56 +2,79 @@ import 'package:flutter/material.dart';
 
 void main(){
   runApp(MaterialApp(
-    title: 'Handling Gesture',
-    home: HandlingGesture(),
-    debugShowCheckedModeBanner: false,
+    title: 'Button Clicked Event',
+    home: ElevatedButtonClick(),
   ));
 }
 
-class HandlingGesture extends StatelessWidget{
+class ElevatedButtonClick extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          tooltip: 'Navigation Menu',
-          onPressed: null,
-        )
-      ),
-      body: Container(
+    return Material(
+      child: Container(
         child: Column(
           children: <Widget>[
+            AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.menu),
+                tooltip: 'Navigation Icon',
+                onPressed: null,
+              ),
+              title: Text('Statefull Button'),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.search),
+                  tooltip: 'Search Button',
+                  onPressed: null,
+
+                )
+              ],
+            ),
             MyButton(),
-            MyButton()
+
           ],
         ),
       ),
-
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Add',
-        onPressed: null,
-        child: Icon(Icons.add),
-      ),
     );
+  }
+
+}
+
+
+class MyButton extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _CounterState();
   }
 }
 
-class MyButton extends StatelessWidget{
+
+
+class _CounterState extends State<MyButton>{
+  int _counter=0;
+  void _increment(){
+    setState(() {
+      _counter++;
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: Colors.blue,
-      ),
-      height: 50.0,
-      padding: const EdgeInsets.all(8.0),
-      margin: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 50),
-      child: Center(
-        child: Text('Engage'),
-      ),
+    // TODO: implement build
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        MaterialButton(
+            onPressed:_increment,
+            child: Text('Increment'),
+            color: Colors.blue,
+        ),
+        SizedBox(width: 16),
+        Text('Count : $_counter'),
+
+      ],
     );
   }
 }
+
+
