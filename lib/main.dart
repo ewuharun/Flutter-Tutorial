@@ -35,6 +35,8 @@ class MyApp extends StatelessWidget{
       ),
       body: GridWidget(),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.pink,
+        elevation: 30,
         child: IconButton(
           tooltip: 'Floating Action Button',
           onPressed: null,
@@ -60,10 +62,18 @@ class GridWidget extends StatelessWidget{
         children: List.generate(100,(index){
           return Container(
             margin: EdgeInsets.all(10),
-
+            padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                color: Colors.grey.withOpacity(.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset:Offset(0,3),
+              )
+              ],
             ),
             child : Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
