@@ -1,80 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 void main(){
-  runApp(MaterialApp(
-    title: 'Button Clicked Event',
-    home: ElevatedButtonClick(),
-  ));
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Creating A GridList',
+      home: MyApp(),
+    )
+  );
 }
 
-class ElevatedButtonClick extends StatelessWidget{
+class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            AppBar(
-              leading: IconButton(
-                icon: Icon(Icons.menu),
-                tooltip: 'Navigation Icon',
-                onPressed: null,
-              ),
-              title: Text('Statefull Button'),
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.search),
-                  tooltip: 'Search Button',
-                  onPressed: null,
-
-                )
-              ],
-            ),
-            MyButton(),
-
-          ],
+    // TODO: implement build
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          tooltip: 'AppBar Icon',
+          onPressed: null,
+          icon: Icon(Icons.menu),
+        ),
+        title: Text(
+          'This is Toolbar'
+        ),
+        actions: <Widget>[
+          IconButton(
+            tooltip: 'Action Search',
+            onPressed: null,
+            icon: Icon(Icons.search),
+          )
+        ],
+      ),
+      body: GridWidget(),
+      floatingActionButton: FloatingActionButton(
+        child: IconButton(
+          tooltip: 'Floating Action Button',
+          onPressed: null,
+          icon: Icon(Icons.add),
         ),
       ),
     );
   }
-
 }
 
-
-class MyButton extends StatefulWidget{
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _CounterState();
-  }
-}
-
-
-
-class _CounterState extends State<MyButton>{
-  int _counter=0;
-  void _increment(){
-    setState(() {
-      _counter++;
-    });
-  }
+class GridWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        MaterialButton(
-            onPressed:_increment,
-            child: Text('Increment'),
-            color: Colors.blue,
-        ),
-        SizedBox(width: 16),
-        Text('Count : $_counter'),
+    return GestureDetector(
+      onTap: (){
+        print('Clicked Grid Item');
+      },
+      child:GridView.count(
+        //This line is for scrolling the horizontal
+        //scrollDirection: Axis.horizontal,
+        //Column count
+        crossAxisCount: 2,
+        children: List.generate(100,(index){
+          return Container(
+            margin: EdgeInsets.all(10),
 
-      ],
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child : Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Text(
+                  'Item $index'
+                ),
+                Text(
+                  'Item $index'
+                )
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 }
-
-
